@@ -24,7 +24,7 @@ def category_service(db, current_user):
             status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized"
         )
     categories = db.query(Category).filter(Category.user_id == user.uid).all()
-    total = db.query(Category).filter(Category.user_id == user.uid).count()
+    total = current_user.total_categories
 
     return {
         "total": total,

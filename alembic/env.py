@@ -3,6 +3,7 @@ import sys
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 from alembic import context
+from ..database import DATABASE_URL
 
 
 sys.path.insert(0, os.path.realpath(os.path.join(os.path.dirname(__file__), '..')))
@@ -11,6 +12,7 @@ from database import Base
 from src.auth.models import User 
 
 config = context.config
+config.set_main_option("sqlalchemy.url", DATABASE_URL)
 if config.config_file_name is not None:
     try:
         fileConfig(config.config_file_name)

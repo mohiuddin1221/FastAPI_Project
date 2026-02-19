@@ -4,6 +4,7 @@ from datetime import datetime
 from sqlalchemy import Identity
 from sqlalchemy import String, DateTime, Boolean, func, UUID, Integer
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy import Enum
 from sqlalchemy.orm import relationship
 from database import Base
@@ -48,3 +49,7 @@ class User(Base):
 
     def __repr__(self):
         return f"User{self.id}-- {self.username}"
+
+    @hybrid_property
+    def total_categories(self):
+        return len(self.categories)
