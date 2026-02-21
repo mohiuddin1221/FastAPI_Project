@@ -10,7 +10,7 @@ from sqlalchemy.orm import relationship
 from database import Base
 from .choices import UserStatus
 from .schemas import UserCreate
-from src.product.models import Category
+from src.product.models import Category, Product
 
 
 class User(Base):
@@ -46,6 +46,7 @@ class User(Base):
     categories: Mapped[List["Category"]] = relationship(
         "Category", back_populates="user", cascade="all, delete-orphan"
     )
+    products: Mapped[List["Product"]] = relationship(back_populates="user")
 
     def __repr__(self):
         return f"User{self.id}-- {self.username}"
@@ -53,3 +54,8 @@ class User(Base):
     @hybrid_property
     def total_categories(self):
         return len(self.categories)
+
+        
+    @hybrid_property
+    def total_products(self):
+        return len(self.products)

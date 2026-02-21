@@ -11,6 +11,7 @@ class Category(BaseModel):
 
 class CategoryResponse(BaseModel):
     id: int
+    uid: UUID
     title: str
     description: Optional[str] = Field(default=None)
     user_id: UUID
@@ -25,3 +26,15 @@ class CategoryListResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class Product(BaseModel):
+    title: str
+    description: Optional[str] = Field(default=None)
+    price: float
+    stock: int
+    category_id: UUID
+
+class ProductResponse(BaseModel):
+    total_products: int
+    products: list[Product]
