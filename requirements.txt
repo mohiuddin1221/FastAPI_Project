@@ -6,3 +6,4 @@ python-dotenv
 fastapi-admin
 uvicorn
 pydantic
+fastapi_amis_admin
